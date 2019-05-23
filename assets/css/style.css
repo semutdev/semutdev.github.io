@@ -1,0 +1,238 @@
+*{
+	margin: 0;
+	padding:0;
+	overflow-x:hidden; 
+}
+html{
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+}
+header{
+	position: fixed;
+	margin-top: 0;
+	height: 40px;
+	background: #fff;
+	width: 100%;
+	padding: 0px;
+	overflow: hidden;
+}
+header .brand{
+	position: absolute;
+	padding: 10px;
+	left: 0;
+	margin-left: 200px;
+	text-transform: uppercase;
+}
+header .mobile{
+	display: none;
+}
+.brand-mobile{
+	display: none;
+}
+header ul{
+	display: flex;
+	list-style: none;
+	padding: 10px;
+	position: absolute;
+	margin-right: 300px;
+	right:0;
+	margin-top: 3px;
+}
+header ul li{
+	margin-right: 15px;
+	font-size: 18px;
+}
+header ul li:hover{
+	border-bottom: 2px #000 solid;
+}
+header ul li a{
+	text-decoration: none;
+	color:#000;
+}
+.jumbotron{
+	width: 100%;
+	height: 300px;
+	box-sizing: cover;
+	background: #000;
+}
+.jumbotron .jumbotron-content{
+	height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	color: #fff
+}
+.jumbotron .jumbotron-content h4{
+	font-size: 70px;
+	box-shadow: #000 4px
+}
+.container{
+	width: 900px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin:auto;
+	background: grey
+}
+.container .content{
+	width: 100%;
+	margin: 20px;
+}
+.container .content h1{
+	color: #fff;
+	font-size: 36px;
+	display: flex;
+	justify-content: center;
+}
+.container .content p{
+	color: #fff;
+	font-size: 18px;
+	margin-top: 10px;
+	padding: 3px;
+	text-align: justify;
+	display: flex;
+	justify-content: center;
+}
+.container .content:nth-child(1){
+	color: #fff;
+	font-weight: 30;
+}
+.container .footer{
+	height: 500px;
+}
+
+/*mobile*/
+@media (min-width: 320px) and (max-width: 480px) {
+	body{
+		margin: 0;
+		padding: 0;
+	}
+	header{
+		position: fixed;
+		bottom: 0;
+		height: 40px;
+		background: #000;
+		width: 100%;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
+	header .mobile{
+		display: inline-flex;
+	}
+	header .mobile .sticky-items{
+		background: #000;
+		margin-left: 3px;
+		display: flex;
+		flex-direction: row;
+		padding: 30px;
+	}
+	header .mobile .sticky-items:hover{
+		background: #fff;
+	}
+	header .mobile .sticky-items a{
+		text-decoration: none;
+		color: #fff
+	}
+	header .mobile .sticky-items a:hover{
+		color: #000
+	}
+	header .brand{
+		display:none!important;
+	}
+	header ul{
+		display: none;
+	}
+	}
+	header .brand{
+		display: inline;
+	}
+
+	.jumbotron{
+		height: 150px;
+	}
+	
+	.jumbotron .jumbotron-content h4{
+		font-size: 30px;
+	}
+	.brand-mobile{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 15px;
+		text-transform: uppercase;
+	}
+	.container .content h1{
+	color: #fff;
+	margin-left: 20px;
+	font-size: 30px;
+	display: flex;
+	justify-content: start;
+	}
+	.container .content p{
+		overflow-y: visible;
+	}
+  
+}
+
+
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  //CSS
+  
+}
