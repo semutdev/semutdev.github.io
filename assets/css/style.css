@@ -70,7 +70,7 @@ header ul li a{
 	box-shadow: #000 4px
 }
 .container{
-	width: 900px;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
