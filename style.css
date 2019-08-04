@@ -1,0 +1,45 @@
+.navbar .navbar-brand{
+	color: #1cd3fc;
+	font-size: 40px;
+}
+
+.navbar-collapse .navbar-nav .nav-link{
+	color: #1cd3fc;
+	text-transform: uppercase;
+}
+
+.navbar{
+	border-bottom: 2px #1cd3fc solid; 
+}
+
+.btn-info {
+	background: linear-gradient(to right,#1cd3fc, #62f5e9);
+	color: #fff;
+	text-transform: uppercase;
+	border: none; 
+}
+
+.card-login{
+	background: linear-gradient(to right,#1cd3fc, #62f5e9);
+	color: #fff;
+	height: 100%;
+}
+
+.btn-login{
+	width: 100px;
+}
+
+.list-group .list-group-item{
+	border: none;
+	margin-left: -15px;
+}
+
+.navbar-toggler{
+	border: none;
+}
+.fa.fa-navicon {
+  color:#1cd3fc;
+}
+.fa-search{
+  color:#1cd3fc !important;	
+} 
