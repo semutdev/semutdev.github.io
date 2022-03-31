@@ -33,7 +33,7 @@ body {
 
 /* hero */
 .hero {
-  background-image: url("/img/41729F.png");
+  background-image: url("../img/41729F.png");
   background-size: cover;
 }
 
@@ -144,7 +144,7 @@ body {
 
 /* talent */
 #talent .card {
-  background-image: url("./img/bg-talent.png");
+  background-image: url("../img/bg-talent.png");
 }
 
 .talent-desc {
