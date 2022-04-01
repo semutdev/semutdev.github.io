@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="./css/custom.css" />
 
     <!-- recotcha v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfsUS8fAAAAAINCbxCr5Fk21b4lTgMLFIiS80V3"></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LfsUS8fAAAAAINCbxCr5Fk21b4lTgMLFIiS80V3"></script> -->
 
     <title>Zig Works</title>
   </head>
@@ -462,12 +462,13 @@
               <div class="card bg-dark contact-card">
                 <h5 class="text-center text-white pt-3">Contact</h5>
                 <div class="card-body">
-                  <form action="" method="post" id="contact_form">
+                  <form action="mailto:thomastelahun@gmail.com"  id="contact_form" enctype="text/plain">
                     <div class="form-group">
                       <input
                         type="text"
                         class="form-control mb-2"
                         placeholder="Name"
+                        name="name"
                       />
                     </div>
                     <div class="form-group">
@@ -475,6 +476,7 @@
                         type="email"
                         class="form-control mb-2"
                         placeholder="Email"
+                        name="mail"
                       />
                     </div>
                     <div class="form-group">
@@ -537,11 +539,11 @@
                         >Description</label
                       >
                       <textarea
-                        name="description"
                         rows="8 "
                         id="description"
                         class="form-control"
                         placeholder="Description"
+                        name="comment"
                       ></textarea>
                     </div>
                     <input
@@ -603,25 +605,25 @@
     ></script>
 
     <script>
-      grecaptcha.ready(function () {
-        grecaptcha
-          .execute("6LfsUS8fAAAAAINCbxCr5Fk21b4lTgMLFIiS80V3", { action: "homepage" })
-          .then(function (token) {
-            console.log("onload's token : " + token);
-            document.getElementById("token").value = token;
-          });
-      });
+      // grecaptcha.ready(function () {
+      //   grecaptcha
+      //     .execute("6LfsUS8fAAAAAINCbxCr5Fk21b4lTgMLFIiS80V3", { action: "homepage" })
+      //     .then(function (token) {
+      //       console.log("onload's token : " + token);
+      //       document.getElementById("token").value = token;
+      //     });
+      // });
       /*refresh get token before it's expire every 90 Seconds */
-      setInterval(function () {
-        grecaptcha.ready(function () {
-          grecaptcha
-            .execute("6LfsUS8fAAAAAINCbxCr5Fk21b4lTgMLFIiS80V3", { action: "request_call_back" })
-            .then(function (token) {
-              console.log("refresh toekn : " + token);
-              document.getElementById("token").value = token;
-            });
-        });
-      }, 90 * 1000);
+      // setInterval(function () {
+      //   grecaptcha.ready(function () {
+      //     grecaptcha
+      //       .execute("6LfsUS8fAAAAAINCbxCr5Fk21b4lTgMLFIiS80V3", { action: "request_call_back" })
+      //       .then(function (token) {
+      //         console.log("refresh toekn : " + token);
+      //         document.getElementById("token").value = token;
+      //       });
+      //   });
+      // }, 90 * 1000);
     </script>
   </body>
 </html>
