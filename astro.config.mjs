@@ -5,6 +5,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://semutdev.my.id',
+	site: 'https://kumpul4semut.github.io',
 	integrations: [mdx(), sitemap()],
 });
