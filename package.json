@@ -12,6 +12,10 @@
     "@astrojs/mdx": "^4.2.4",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.0",
-    "astro": "^5.7.2"
+    "@astrojs/tailwind": "^2.1.2",
+    "astro": "^5.7.2",
+    "tailwindcss": "^3.2.4",
+    "tailwind-highlightjs": "^2.0.1",
+    "@tailwindcss/typography": "^0.5.8"
   }
 }
