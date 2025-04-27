@@ -6,7 +6,7 @@ interface Props {
 const { date } = Astro.props;
 ---
 
-<time class="flex justify-center" datetime={date.toISOString()}>
+<time class="flex justify-center md:justify-start" datetime={date.toISOString()}>
 	{
 		date.toLocaleDateString('id-ID', {
 			year: 'numeric',
