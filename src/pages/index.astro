@@ -1,20 +1,178 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>semutdev</h1>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <!-- <Header /> -->
+    <main>
+      <main class="max-w-7xl mx-auto min-h-screen bg-gray-100">
+        <div class="flex flex-col md:flex-row">
+          <!-- Left Column - Bio & Links -->
+          <aside class="w-full md:w-80 p-6 md:min-h-screen">
+            <div class="sticky top-8">
+              <div class="flex flex-col items-center space-y-4">
+                <img
+                  src="/img/logo-kotak-label.png"
+                  alt="{SITE_TITLE}"
+                  class="w-40"
+                />
+				<h2 class="text-lg font-bold text-center">Tutorial, Teknologi, Koding dan lainnya 🔥</h2>
+                <p class="text-sm text-gray-600 text-center">Berbagi rayapan programmer mulai dari pengalaman, tutorial, produk dan lain sebagainya. </p>
+              </div>
+              <!-- Links -->
+              <div class="mt-6 space-y-3">
+				<a
+                  target="_blank"
+                  href="https://www.youtube.com/@semutdev"
+                  class="block w-full p-2 rounded-md border-2 text-center font-semibold text-gray-800 bg-white transition-all duration-200
+										shadow-md hover:shadow-xl hover:scale-[1.02] border-red-800"
+                >
+                  Youtube
+                </a>
+                <a
+                  target="_blank"
+                  href="https://www.instagram.com/semutdev"
+                  class="block w-full p-2 rounded-md border-2 text-center font-semibold text-gray-800 bg-white transition-all duration-200
+										shadow-md hover:shadow-xl hover:scale-[1.02] border-pink-800"
+                >
+                  Instagram
+                </a>
+				<a
+                  target="_blank"
+                  href="https://www.threads.net/@semutdev"
+                  class="block w-full p-2 rounded-md border-2 text-center font-semibold text-gray-800 bg-white transition-all duration-200
+										shadow-md hover:shadow-xl hover:scale-[1.02] border-black"
+                >
+                  Threads
+                </a>
+				<a
+                  href="/blog"
+                  class="block w-full p-2 rounded-md border-2 text-center font-semibold text-gray-800 bg-white transition-all duration-200
+										shadow-md hover:shadow-xl hover:scale-[1.02] border-black"
+                >
+                  Blog
+                </a>
+				<a
+                  target="_blank"
+                  href="https://www.linkedin.com/in/jujun-jamaludin/"
+                  class="block w-full p-2 rounded-md border-2 text-center font-semibold text-gray-800 bg-white transition-all duration-200
+										shadow-md hover:shadow-xl hover:scale-[1.02] border-[#0057B5]"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </aside>
+          <!-- Right Column - Products -->
+          <section class="flex-1 p-6 md:p-8">
+			<!-- Product section -->
+			 <div class="my-2">
+				<!-- Title rayapan -->
+				<h1 class="text-xl font-bold text-center my-4 md:text-left">Rayapan Produk</h1>
+				<!-- Products wrap -->
+				<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+					<!-- Product item -->
+					<a
+						href="https://wa.me/6285349448726?text=Assalamualaikum%20bang%20semut%20saya%20mau%20buat%20web%20"
+						class="block cursor-pointer"
+						target="_blank"
+					>
+						<div
+						class="border-2 border-gray-600 bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200 hover:scale-[1.01]"
+						>
+						<div class="relative">
+							<img
+							src="/product/jasa-web.jpg"
+							alt="Produk tes 1"
+							class="w-full h-32 sm:h-40 object-cover bg-[#3b82f6]"
+							loading="lazy"
+							/>
+							<!-- <span class="absolute top-2 left-2 sm:top-3 sm:left-3 bg-[#3b82f6] text-white px-2 py-0.5 rounded-md text-xs sm:text-sm font-medium shadow-sm">Semaumu</span> -->
+						</div>
+						<div class="p-3 sm:p-4">
+							<h2
+							class="text-gray-900 text-sm sm:text-base mb-1.5 sm:mb-2 line-clamp-2"
+							>
+								Konsultasi pembuatan, tambah fitur web atau aplikasi
+							</h2>
+							<div class="flex items-baseline gap-1.5 sm:gap-2">
+							<span
+								class="text-[#3b82f6] text-base sm:text-lg font-semibold"
+								>Rp0</span
+							>
+							<span
+								class="text-gray-600 text-xs sm:text-sm line-through"
+								>Rp5.000.000</span
+							>
+							</div>
+						</div>
+						</div>
+					</a>
+					<!-- ./Product item -->
+				</div>
+				<!-- ./Products wrap -->
+			</div>
+			<!-- ./Product section -->
+			<!-- Blog section -->
+			<div class="my-2">
+				<!-- Title rayapan -->
+				<h1 class="text-xl font-bold text-center my-4 md:text-left">Rayapan Artikel</h1>
+				<!-- Artikel wrap -->
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+					<!-- Artikel item -->
+					{
+						posts.map((post) => (
+							<a
+								href={`/blog/${post.id}/`}
+								class="block cursor-pointer"
+							>
+								<div
+								class="border-2 border-gray-600 bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200 hover:scale-[1.01]"
+								>
+								<div class="relative">
+									<img
+									src={post.data.heroImage}
+									alt="Produk tes 1"
+									class="w-full h-32 sm:h-40 object-cover bg-[#3b82f6]"
+									loading="lazy"
+									/>
+								</div>
+								<div class="p-3 sm:p-4">
+									<h2
+									class="font-semibold mb-1.5 sm:mb-2 line-clamp-2"
+									>
+										{post.data.title}
+									</h2>
+									<p class="font-light">
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+								</div>
+								</div>
+							</a>
+						))
+					}
+					<!-- ./Artikel item -->
+				</div>
+			</div>
+			<!-- ./Blog section -->
+          </section>
+        </div>
+      </main>
+    </main>
+    <!-- <Footer /> -->
+  </body>
 </html>
