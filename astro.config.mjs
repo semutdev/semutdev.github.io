@@ -9,8 +9,15 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://kumpul4semut.github.io',
   integrations: [mdx(), sitemap()],
-
   vite: {
     plugins: [tailwindcss()],
+  },
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'one-dark-pro',
+        dark: 'one-light',
+      },
+    },
   },
 });
