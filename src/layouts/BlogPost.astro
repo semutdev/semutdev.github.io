@@ -4,10 +4,13 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import { getCollection } from 'astro:content';
 
 type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+const produkList = await getCollection('produk');
 ---
 
 <html lang="en" class="scroll-smooth bg-white dark:bg-gray-900">
@@ -51,41 +54,46 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         <!-- Sidebar -->
         <aside class="px-4 sm:px-6 rounded-2xl bg-gray-50 dark:bg-gray-800 shadow-md">
           <h2 class="text-2xl font-semibold mb-6 text-center">Rayapan Produk</h2>
-          <a
-            href="https://wa.me/6285349448726?text=Assalamualaikum%20bang%20semut%20saya%20mau%20buat%20web%20"
-            class="block cursor-pointer"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div
-              class="w-full max-w-xs mx-auto border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-lg transition-transform duration-200 hover:scale-105"
-            >
-              <div class="relative">
-                <img
-                  src="/product/jasa-web.jpg"
-                  alt="Produk tes 1"
-                  class="w-full h-40 object-cover bg-[#3b82f6]"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-4">
-                <h3
-                  class="text-gray-900 dark:text-gray-100 text-base mb-2 line-clamp-2"
+          {
+            produkList.slice(0, 5).map((product: any) => (
+              <a
+                href={product.data.checkoutUrl}
+                class="block cursor-pointer mb-4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div
+                  class="w-full max-w-xs mx-auto border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-lg transition-transform duration-200 hover:scale-105"
                 >
-                  Konsultasi pembuatan, tambah fitur web atau aplikasi
-                </h3>
-                <div class="flex items-baseline gap-2">
-                  <span
-                    class="text-[#3b82f6] text-lg font-semibold"
-                    >Rp0</span
-                  >
-                  <span class="text-gray-600 dark:text-gray-400 text-sm line-through"
-                    >Rp5.000.000</span
-                  >
+                  <div class="relative">
+                    <img
+                      src={product.data.image}
+                      alt={product.data.title}
+                      class="w-full h-40 object-cover bg-[#3b82f6]"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="p-4">
+                    <h3
+                      class="text-gray-900 dark:text-gray-100 text-base mb-2 line-clamp-2"
+                    >
+                      {product.data.title}
+                    </h3>
+                    <div class="flex items-baseline gap-2">
+                      <span
+                        class="text-[#3b82f6] text-lg font-semibold"
+                        >Rp{product.data.price.toLocaleString('id-ID')}</span
+                      >
+                      {product.data.discount && (
+                        <span class="text-gray-600 dark:text-gray-400 text-sm line-through"
+                          >Rp{product.data.discount.toLocaleString('id-ID')}</span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </a>
+              </a>
+            ))
+          }
         </aside>
       </div>
     </main>
