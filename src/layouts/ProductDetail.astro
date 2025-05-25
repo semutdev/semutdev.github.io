@@ -1,0 +1,86 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const { title, description, price, discount, images, checkoutUrl } = Astro.props;
+---
+
+<html lang="en" class="scroll-smooth bg-white dark:bg-gray-900">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body class="text-gray-900 dark:text-gray-100 font-sans leading-relaxed">
+    <Header />
+    <main class="container mx-auto px-4 md:px-8 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <!-- Image carousel -->
+        <div class="relative rounded-2xl overflow-hidden shadow-lg">
+          {images && images.length > 0 ? (
+            <div class="carousel">
+              {images.map((img: any, index: number) => {
+                const imageUrl = typeof img === 'string' ? img : img?.src ?? '';
+                return (
+                  <img
+                    src={imageUrl}
+                    alt={`${title} image ${index + 1}`}
+                    class="w-full h-auto object-cover rounded-2xl"
+                    loading="lazy"
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <img
+              src={typeof images === 'string' ? images : ''}
+              alt={title}
+              class="w-full h-auto object-cover rounded-2xl"
+              loading="lazy"
+            />
+          )}
+        </div>
+
+        <!-- Product details -->
+        <article class="flex flex-col justify-between">
+          <div>
+            <h1 class="text-4xl font-extrabold mb-4">{title}</h1>
+            <div class="mb-6">
+              {discount ? (
+                <div class="flex items-baseline space-x-4">
+                  <span class="text-2xl font-bold text-red-600 dark:text-red-400 line-through">
+                    Rp{discount.toLocaleString('id-ID')}
+                  </span>
+                  <span class="text-3xl font-extrabold text-gray-900 dark:text-gray-100">
+                    Rp{price.toLocaleString('id-ID')}
+                  </span>
+                </div>
+              ) : (
+                <span class="text-3xl font-extrabold text-gray-900 dark:text-gray-100">
+                  Rp{price.toLocaleString('id-ID')}
+                </span>
+              )}
+            </div>
+            <div class="prose max-w-none dark:prose-invert text-lg leading-relaxed mb-8">
+              <slot />
+            </div>
+          </div>
+          <div>
+            <a
+              href={checkoutUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white text-lg font-semibold rounded-lg shadow-md transition-colors duration-300"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m5-9v9m4-9v9m4-9l2 9" />
+              </svg>
+              Beli
+            </a>
+          </div>
+        </article>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

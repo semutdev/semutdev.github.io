@@ -1,9 +1,11 @@
 ---
-title: "Konsultasi pembuatan website dan aplikasi. mulai dari"
+title: "Konsultasi pembuatan website dan aplikasi mulai dari"
 description: "Konsultasi jasa pembuatan website dan aplikasi mulai dari 50000"
 price: 50000
 discount: 5000000
 image: "/product/jasa-web.jpg"
+images:
+  - "/product/jasa-web.jpg"
 checkoutUrl: "https://wa.me/6285349448726?text=Assalamualaikum%20bang%20semut%20saya%20mau%20buat%20web%20"
 ---
 Kami menyediakan jasa pembuatan website dan aplikasi profesional dengan harga mulai dari Rp50.000. Apakah Anda membutuhkan website untuk bisnis, portofolio, atau aplikasi khusus? Kami siap membantu mewujudkan ide Anda menjadi kenyataan.

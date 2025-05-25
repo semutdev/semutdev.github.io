@@ -23,6 +23,7 @@ const produk = defineCollection({
 		price: z.number(),
 		discount: z.number().optional(),
 		image: z.string(),
+		images: z.array(z.string()).optional(),
 		checkoutUrl: z.string(),
 	}),
 });

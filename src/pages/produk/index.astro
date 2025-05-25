@@ -1,0 +1,157 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const allProducts = (await getCollection('produk')).sort(
+  (a, b) => b.data.price - a.data.price
+);
+
+const PRODUCTS_PER_PAGE = 12;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth bg-white dark:bg-gray-900">
+  <head>
+    <BaseHead title={`Produk - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="text-gray-900 dark:text-gray-100 font-sans leading-relaxed">
+    <Header />
+    <main class="container mx-auto px-4 md:px-8 py-10">
+      <section>
+        <h2 class="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">Daftar Produk</h2>
+        <div id="products-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {
+            allProducts.slice(0, PRODUCTS_PER_PAGE).map((product) => (
+              <article
+                class="border border-gray-300 dark:border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+              >
+                <a href={`/produk/${product.slug}/`} class="block group">
+                  <img
+                    src={product.data.image}
+                    alt={product.data.title}
+                    class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                  <div class="p-4">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100 line-clamp-2">
+                      {product.data.title}
+                    </h3>
+                    <div class="flex items-baseline gap-2">
+                      <span class="text-[#3b82f6] text-base font-semibold">
+                        Rp{product.data.price.toLocaleString('id-ID')}
+                      </span>
+                      {product.data.discount && (
+                        <span class="text-gray-600 dark:text-gray-400 text-sm line-through">
+                          Rp{product.data.discount.toLocaleString('id-ID')}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+        <!-- Pagination controls -->
+        <div class="flex justify-center mt-8 space-x-4">
+          <button
+            id="prevPage"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded disabled:opacity-50"
+            disabled
+          >
+            Previous
+          </button>
+          <button
+            id="nextPage"
+            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded"
+          >
+            Next
+          </button>
+        </div>
+      </section>
+    </main>
+    <Footer />
+    <script type="module">
+      document.addEventListener('DOMContentLoaded', () => {
+        const products = JSON.parse('@json(allProducts)');
+        const productsPerPage = 12;
+        let currentPage = 1;
+        const totalPages = Math.ceil(products.length / productsPerPage);
+
+        const productsList = document.getElementById('products-list');
+        const prevButton = document.getElementById('prevPage');
+        const nextButton = document.getElementById('nextPage');
+
+        function renderProducts(page) {
+          productsList.innerHTML = '';
+          const start = (page - 1) * productsPerPage;
+          const end = start + productsPerPage;
+          const pageProducts = products.slice(start, end);
+
+          pageProducts.forEach(product => {
+            const article = document.createElement('article');
+            article.className = 'border border-gray-300 dark:border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300';
+
+            const link = document.createElement('a');
+            link.href = `/produk/${product.slug}/`;
+            link.className = 'block group';
+
+            const img = document.createElement('img');
+            img.src = product.data.image;
+            img.alt = product.data.title;
+            img.className = 'w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300';
+            img.loading = 'lazy';
+
+            const div = document.createElement('div');
+            div.className = 'p-4';
+
+            const h3 = document.createElement('h3');
+            h3.className = 'text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100 line-clamp-2';
+            h3.textContent = product.data.title;
+
+            const p = document.createElement('p');
+            p.className = 'text-sm text-gray-600 dark:text-gray-400';
+            p.textContent = '';
+
+            div.appendChild(h3);
+            div.appendChild(p);
+            link.appendChild(img);
+            link.appendChild(div);
+            article.appendChild(link);
+            productsList.appendChild(article);
+          });
+        }
+
+        function updateButtons() {
+          prevButton.disabled = currentPage === 1;
+          nextButton.disabled = currentPage === totalPages;
+        }
+
+        prevButton.addEventListener('click', () => {
+          if (currentPage > 1) {
+            currentPage--;
+            renderProducts(currentPage);
+            updateButtons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+
+        nextButton.addEventListener('click', () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            renderProducts(currentPage);
+            updateButtons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+
+        renderProducts(currentPage);
+        updateButtons();
+      });
+    </script>
+  </body>
+</html>

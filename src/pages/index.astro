@@ -92,9 +92,8 @@ const products = (await getCollection('produk')).sort(
 					{
 						products.map((product) => (
 							<a
-								href={product.data.checkoutUrl}
+								href={`/produk/${product.id}/`}
 								class="block cursor-pointer"
-								target="_blank"
 								rel="noopener noreferrer"
 							>
 								<div
