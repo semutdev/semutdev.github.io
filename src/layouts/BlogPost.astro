@@ -10,78 +10,76 @@ type Props = CollectionEntry<"blog">["data"];
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="scroll-smooth bg-white dark:bg-gray-900">
   <head>
     <BaseHead title={title} description={description} />
   </head>
-  <body>
+  <body class="text-gray-900 dark:text-gray-100 font-sans leading-relaxed">
     <Header />
-    <div class="container mx-auto px-0 md:px-4 py-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-        <!-- Artikel utama -->
-        <div class="md:col-span-2">
-          <article
-            id="content"
-            class="prose max-w-none dark:prose-invert border-0 md:border-2 border-gray-600 px-1.5 md-px-2.5 rounded-xl py-3"
-          >
-            <h1 class="text-3xl bold text-center md:text-left">{title}</h1>
+    <main class="container mx-auto px-4 md:px-8 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Main article -->
+        <article
+          id="content"
+          class="prose max-w-none dark:prose-invert border border-gray-300 dark:border-gray-700 rounded-2xl p-8 shadow-lg transition-shadow duration-300 hover:shadow-xl md:col-span-3"
+          style="max-width: 1200px; width: 100%;"
+        >
+          <h1 class="text-4xl font-extrabold text-center md:text-left mb-4">{title}</h1>
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 text-sm text-gray-600 dark:text-gray-400">
             <FormattedDate date={pubDate} />
-            {
-              updatedDate && (
-                <div class="text-center text-2xl">
-                  <FormattedDate date={updatedDate} />
-                </div>
-              )
-            }
-            <div class="flex justify-center">
-              {
-                heroImage && (
-                  <img
-                    class="lazyload max-w-full h-auto"
-                    src={heroImage}
-                    alt={title}
-                  />
-                )
-              }
+            {updatedDate && (
+              <span class="mt-2 md:mt-0 text-gray-500 dark:text-gray-400 italic">
+                Updated: <FormattedDate date={updatedDate} />
+              </span>
+            )}
+          </div>
+          {heroImage && (
+            <div class="mb-6 flex justify-center">
+              <img
+                class="rounded-xl max-w-full h-auto shadow-md"
+                src={heroImage}
+                alt={title}
+                loading="lazy"
+              />
             </div>
-            <div class="text-lg">
-              <slot />
-            </div>
-          </article>
-        </div>
+          )}
+          <div class="text-lg leading-relaxed">
+            <slot />
+          </div>
+        </article>
 
-        <!-- Rayapan produk -->
-        <aside class="md:col-span:1 px-6 rounded-lg">
-          <h2 class="text-xl font-semibold mb-4">Rayapan Produk</h2>
+        <!-- Sidebar -->
+        <aside class="px-4 sm:px-6 rounded-2xl bg-gray-50 dark:bg-gray-800 shadow-md">
+          <h2 class="text-2xl font-semibold mb-6 text-center">Rayapan Produk</h2>
           <a
             href="https://wa.me/6285349448726?text=Assalamualaikum%20bang%20semut%20saya%20mau%20buat%20web%20"
             class="block cursor-pointer"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <div
-              class="w-60 border-2 border-gray-600 bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200 hover:scale-[1.01]"
+              class="w-full max-w-xs mx-auto border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-xl overflow-hidden hover:shadow-lg transition-transform duration-200 hover:scale-105"
             >
               <div class="relative">
                 <img
                   src="/product/jasa-web.jpg"
                   alt="Produk tes 1"
-                  class="w-full h-32 sm:h-40 object-cover bg-[#3b82f6]"
+                  class="w-full h-40 object-cover bg-[#3b82f6]"
                   loading="lazy"
                 />
-                <!-- <span class="absolute top-2 left-2 sm:top-3 sm:left-3 bg-[#3b82f6] text-white px-2 py-0.5 rounded-md text-xs sm:text-sm font-medium shadow-sm">Semaumu</span> -->
               </div>
-              <div class="p-3 sm:p-4">
-                <h2
-                  class="text-gray-900 text-sm sm:text-base mb-1.5 sm:mb-2 line-clamp-2"
+              <div class="p-4">
+                <h3
+                  class="text-gray-900 dark:text-gray-100 text-base mb-2 line-clamp-2"
                 >
                   Konsultasi pembuatan, tambah fitur web atau aplikasi
-                </h2>
-                <div class="flex items-baseline gap-1.5 sm:gap-2">
+                </h3>
+                <div class="flex items-baseline gap-2">
                   <span
-                    class="text-[#3b82f6] text-base sm:text-lg font-semibold"
+                    class="text-[#3b82f6] text-lg font-semibold"
                     >Rp0</span
                   >
-                  <span class="text-gray-600 text-xs sm:text-sm line-through"
+                  <span class="text-gray-600 dark:text-gray-400 text-sm line-through"
                     >Rp5.000.000</span
                   >
                 </div>
@@ -90,7 +88,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
           </a>
         </aside>
       </div>
-    </div>
+    </main>
     <Footer />
     <script type="module">
       window.addEventListener("DOMContentLoaded", () => {
@@ -103,7 +101,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
           button.className =
             "absolute top-2 right-2 bg-gray-800 text-white text-xs px-2 py-1 rounded hover:bg-gray-700";
 
-          // Pastikan parent relative biar tombol di pojok
+          // Ensure parent is relative so button is positioned correctly
           pre.classList.add("relative");
           pre.appendChild(button);
 
@@ -117,7 +115,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
                   button.innerText = "Copy";
                 }, 2000);
               })
-              .catch((err) => console.error("Gagal copy:", err));
+              .catch((err) => console.error("Failed to copy:", err));
           });
         });
       });
