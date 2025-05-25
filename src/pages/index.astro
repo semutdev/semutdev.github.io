@@ -9,6 +9,10 @@ import FormattedDate from '../components/FormattedDate.astro';
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const products = (await getCollection('produk')).sort(
+  (a, b) => b.data.price - a.data.price
+);
 ---
 
 <!doctype html>
@@ -85,44 +89,47 @@ const posts = (await getCollection('blog')).sort(
 				<h1 class="text-xl font-bold text-center my-4 md:text-left">Rayapan Produk</h1>
 				<!-- Products wrap -->
 				<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-					<!-- Product item -->
-					<a
-						href="https://wa.me/6285349448726?text=Assalamualaikum%20bang%20semut%20saya%20mau%20buat%20web%20"
-						class="block cursor-pointer"
-						target="_blank"
-					>
-						<div
-						class="border-2 border-gray-600 bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200 hover:scale-[1.01]"
-						>
-						<div class="relative">
-							<img
-							src="/product/jasa-web.jpg"
-							alt="Produk tes 1"
-							class="w-full h-32 sm:h-40 object-cover bg-[#3b82f6]"
-							loading="lazy"
-							/>
-							<!-- <span class="absolute top-2 left-2 sm:top-3 sm:left-3 bg-[#3b82f6] text-white px-2 py-0.5 rounded-md text-xs sm:text-sm font-medium shadow-sm">Semaumu</span> -->
-						</div>
-						<div class="p-3 sm:p-4">
-							<h2
-							class="text-gray-900 text-sm sm:text-base mb-1.5 sm:mb-2 line-clamp-2"
+					{
+						products.map((product) => (
+							<a
+								href={product.data.checkoutUrl}
+								class="block cursor-pointer"
+								target="_blank"
+								rel="noopener noreferrer"
 							>
-								Konsultasi pembuatan, tambah fitur web atau aplikasi
-							</h2>
-							<div class="flex items-baseline gap-1.5 sm:gap-2">
-							<span
-								class="text-[#3b82f6] text-base sm:text-lg font-semibold"
-								>Rp0</span
-							>
-							<span
-								class="text-gray-600 text-xs sm:text-sm line-through"
-								>Rp5.000.000</span
-							>
-							</div>
-						</div>
-						</div>
-					</a>
-					<!-- ./Product item -->
+								<div
+								class="border-2 border-gray-600 bg-white rounded-xl overflow-hidden hover:shadow-lg transition-all duration-200 hover:scale-[1.01]"
+								>
+								<div class="relative">
+									<img
+									src={product.data.image}
+									alt={product.data.title}
+									class="w-full h-32 sm:h-40 object-cover bg-[#3b82f6]"
+									loading="lazy"
+									/>
+								</div>
+								<div class="p-3 sm:p-4">
+									<h2
+									class="text-gray-900 text-sm sm:text-base mb-1.5 sm:mb-2 line-clamp-2"
+									>
+										{product.data.title}
+									</h2>
+									<div class="flex items-baseline gap-1.5 sm:gap-2">
+										<span
+										class="text-[#3b82f6] text-base sm:text-lg font-semibold"
+										>Rp{product.data.price.toLocaleString('id-ID')}</span
+										>
+										{product.data.discount && (
+											<span
+											class="text-gray-600 text-xs sm:text-sm line-through"
+											>Rp{product.data.discount.toLocaleString('id-ID')}</span>
+										)}
+									</div>
+								</div>
+								</div>
+							</a>
+						))
+					}
 				</div>
 				<!-- ./Products wrap -->
 			</div>

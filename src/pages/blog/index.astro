@@ -5,38 +5,145 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
-
-const posts = (await getCollection('blog')).sort(
+const allPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const POSTS_PER_PAGE = 12;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth bg-white dark:bg-gray-900">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
+	<body class="text-gray-900 dark:text-gray-100 font-sans leading-relaxed">
 		<Header />
-		<main>
+		<main class="container mx-auto px-4 md:px-8 py-10">
 			<section>
-				<ul>
+        <h2 class="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">Rayapan Artikel</h2>
+				<div id="posts-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
+						allPosts.slice(0, POSTS_PER_PAGE).map((post) => (
+							<article
+								class="border border-gray-300 dark:border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+							>
+								<a href={`/blog/${post.id}/`} class="block group">
+									<img
+										src={post.data.heroImage}
+										alt={post.data.title}
+										class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+										loading="lazy"
+									/>
+									<div class="p-4">
+										<h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100 line-clamp-2">
+											{post.data.title}
+										</h3>
+										<p class="text-sm text-gray-600 dark:text-gray-400">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+									</div>
 								</a>
-							</li>
+							</article>
 						))
 					}
-				</ul>
+				</div>
+				<!-- Pagination controls -->
+				<div class="flex justify-center mt-8 space-x-4">
+					<button
+						id="prevPage"
+						class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded disabled:opacity-50"
+						disabled
+					>
+						Previous
+					</button>
+					<button
+						id="nextPage"
+						class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded"
+					>
+						Next
+					</button>
+				</div>
 			</section>
 		</main>
 		<Footer />
+		<script type="module">
+			document.addEventListener('DOMContentLoaded', () => {
+				const posts = JSON.parse('@json(allPosts)');
+				const postsPerPage = 12;
+				let currentPage = 1;
+				const totalPages = Math.ceil(posts.length / postsPerPage);
+
+				const postsList = document.getElementById('posts-list');
+				const prevButton = document.getElementById('prevPage');
+				const nextButton = document.getElementById('nextPage');
+
+				function renderPosts(page) {
+					postsList.innerHTML = '';
+					const start = (page - 1) * postsPerPage;
+					const end = start + postsPerPage;
+					const pagePosts = posts.slice(start, end);
+
+					pagePosts.forEach(post => {
+						const article = document.createElement('article');
+						article.className = 'border border-gray-300 dark:border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300';
+
+						const link = document.createElement('a');
+						link.href = `/blog/${post.id}/`;
+						link.className = 'block group';
+
+						const img = document.createElement('img');
+						img.src = post.data.heroImage;
+						img.alt = post.data.title;
+						img.className = 'w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300';
+						img.loading = 'lazy';
+
+						const div = document.createElement('div');
+						div.className = 'p-4';
+
+						const h3 = document.createElement('h3');
+						h3.className = 'text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100 line-clamp-2';
+						h3.textContent = post.data.title;
+
+						const p = document.createElement('p');
+						p.className = 'text-sm text-gray-600 dark:text-gray-400';
+						p.textContent = new Date(post.data.pubDate).toLocaleDateString();
+
+						div.appendChild(h3);
+						div.appendChild(p);
+						link.appendChild(img);
+						link.appendChild(div);
+						article.appendChild(link);
+						postsList.appendChild(article);
+					});
+				}
+
+				function updateButtons() {
+					prevButton.disabled = currentPage === 1;
+					nextButton.disabled = currentPage === totalPages;
+				}
+
+				prevButton.addEventListener('click', () => {
+					if (currentPage > 1) {
+						currentPage--;
+						renderPosts(currentPage);
+						updateButtons();
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					}
+				});
+
+				nextButton.addEventListener('click', () => {
+					if (currentPage < totalPages) {
+						currentPage++;
+						renderPosts(currentPage);
+						updateButtons();
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					}
+				});
+
+				renderPosts(currentPage);
+				updateButtons();
+			});
+		</script>
 	</body>
 </html>
