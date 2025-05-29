@@ -92,7 +92,7 @@ const products = (await getCollection('produk')).sort(
 					{
 						products.map((product) => (
 							<a
-								href={`/produk/${product.id}/`}
+								href={product.data.showDetail == true ? `/produk/${product.id}/` : `${product.data.checkoutUrl}/`}
 								class="block cursor-pointer"
 								rel="noopener noreferrer"
 							>

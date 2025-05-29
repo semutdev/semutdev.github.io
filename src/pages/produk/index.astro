@@ -29,7 +29,7 @@ const PRODUCTS_PER_PAGE = 12;
               <article
                 class="border border-gray-300 dark:border-gray-700 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
               >
-                <a href={`/produk/${product.slug}/`} class="block group">
+                <a href={product.data.showDetail == true ? `/produk/${product.id}/` : `${product.data.checkoutUrl}/`} class="block group">
                   <img
                     src={product.data.image}
                     alt={product.data.title}
