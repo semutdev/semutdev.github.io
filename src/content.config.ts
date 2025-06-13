@@ -26,6 +26,7 @@ const produk = defineCollection({
 		images: z.array(z.string()).optional(),
 		checkoutUrl: z.string(),
 		showDetail: z.boolean().optional(),
+		pubDate: z.coerce.date(),
 	}),
 });
 

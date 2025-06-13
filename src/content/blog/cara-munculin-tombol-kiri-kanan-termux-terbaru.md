@@ -1,7 +1,7 @@
 ---
 title: 'Cara Memunculkan Tombol Panah Kiri Kanan Termux'
 description: 'memunculkan panah kanan kiri termux terbaru yang hilang sangat mudah untuk memunculkan tombol pintas panah kiri kanan termux'
-pubDate: 'Marc 21 2019'
+pubDate: '03/21/2019'
 heroImage: '/blog/cara-munculin-tombol-kiri-kanan-termux-terbaru/hero.jpg'
 ---
 

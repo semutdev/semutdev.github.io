@@ -1,7 +1,5 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -11,7 +9,7 @@ const posts = (await getCollection('blog')).sort(
 );
 
 const products = (await getCollection('produk')).sort(
-  (a, b) => b.data.price - a.data.price
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
@@ -21,7 +19,6 @@ const products = (await getCollection('produk')).sort(
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body>
-    <!-- <Header /> -->
     <main>
       <main class="max-w-7xl mx-auto min-h-screen bg-gray-100">
         <div class="flex flex-col md:flex-row">
@@ -118,7 +115,7 @@ const products = (await getCollection('produk')).sort(
 										class="text-[#3b82f6] text-base sm:text-lg font-semibold"
 										>Rp{product.data.price.toLocaleString('id-ID')}</span
 										>
-										{product.data.discount && (
+										{product.data.discount != 0 && (
 											<span
 											class="text-gray-600 text-xs sm:text-sm line-through"
 											>Rp{product.data.discount.toLocaleString('id-ID')}</span>
@@ -179,6 +176,5 @@ const products = (await getCollection('produk')).sort(
         </div>
       </main>
     </main>
-    <!-- <Footer /> -->
   </body>
 </html>

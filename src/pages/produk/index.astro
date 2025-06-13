@@ -44,7 +44,7 @@ const PRODUCTS_PER_PAGE = 12;
                       <span class="text-[#3b82f6] text-base font-semibold">
                         Rp{product.data.price.toLocaleString('id-ID')}
                       </span>
-                      {product.data.discount && (
+                      {product.data.discount !=0 && (
                         <span class="text-gray-600 dark:text-gray-400 text-sm line-through">
                           Rp{product.data.discount.toLocaleString('id-ID')}
                         </span>

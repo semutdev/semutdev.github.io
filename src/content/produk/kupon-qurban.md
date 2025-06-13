@@ -1,13 +1,14 @@
 ---
-title: "[PROMO] Script Website Kupon Qurban Premium: Database & QR Code Scanner!"
-description: "[PROMO] Script Website Kupon Qurban Premium: Database & QR Code Scanner!"
-price: 25000
-discount: 50000
+title: "Script Website Kupon Qurban Premium: Database & QR Code Scanner!"
+description: "Script Website Kupon Qurban Premium: Database & QR Code Scanner!"
+price: 50000
+discount: 0
 image: "/product/kupon-qurban/banner.jpg"
 images:
   - "/product/kupon-qurban/banner.jpg"
 checkoutUrl: "https://utas.me/semutdev/new-digital-product-EQkR"
-showDetail: false
+showDetail: true
+pubDate: '05/26/2025'
 ---
 Permudah proses manajemen dan distribusi kupon qurban Anda dengan Script Website Kupon Qurban Digital kami! Dirancang khusus untuk panitia qurban, masjid, maupun lembaga sosial agar penyelenggaraan ibadah qurban berjalan lebih modern, efisien, dan transparan.
 

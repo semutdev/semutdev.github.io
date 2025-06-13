@@ -1,7 +1,7 @@
 ---
 title: 'Cara Memberi Warna Pada kode Script Terminal dan Termux'
 description: 'memberi warna pada terminal, termux, command prompt, cmd python ,bash script, php terminal print warna echo warna di terminal linux'
-pubDate: 'Mar 10 2019'
+pubDate: '03/10/2019'
 heroImage: '/blog/cara-memberi-warna-pada-kode-script-terminal-dan-termux-command-prompt/hero.png'
 ---
 

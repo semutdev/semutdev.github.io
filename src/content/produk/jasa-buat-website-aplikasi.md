@@ -8,6 +8,7 @@ images:
   - "/product/jasa-web.jpg"
 checkoutUrl: "https://wa.me/6285349448726?text=Assalamualaikum%20bang%20semut%20saya%20mau%20buat%20web%20"
 showDetail: true
+pubDate: '04/17/2025'
 ---
 Kami menyediakan jasa pembuatan website dan aplikasi profesional dengan harga mulai dari Rp50.000. Apakah Anda membutuhkan website untuk bisnis, portofolio, atau aplikasi khusus? Kami siap membantu mewujudkan ide Anda menjadi kenyataan.
 

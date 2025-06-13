@@ -2,53 +2,95 @@
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
 ---
-<header class="bg-white shadow-md sticky top-0 z-50">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-    <!-- Logo -->
-	<a href="/"
-		><img
-		width="150"
-		src="/img/logo-semutdev.png"
-		alt="Logo semutdev"
-		/></a>
-    <!-- <div class="text-2xl font-bold text-blue-600">{SITE_TITLE}</div> -->
 
-    <!-- Hamburger button (Mobile) -->
-    <button id="menu-toggle" class="md:hidden text-gray-700 focus:outline-none">
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
-
-    <!-- Navigation Links -->
-    <nav id="menu" class="hidden md:flex space-x-6">
-      <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
-    </nav>
-  </div>
-
-  <!-- Mobile Menu (Dropdown) -->
-  <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
-    <nav class="flex flex-col space-y-2">
-		<a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
-    </nav>
+<header
+  id="navbar"
+  class="bg-white shadow-md sticky top-0 z-50 transition-transform duration-300 ease-in-out"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <a
+          href="/"
+          class="text-gray-700 hover:text-blue-600 flex items-center space-x-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <span class="md:block hidden">Kembali</span>
+        </a>
+      </div>
+      <div class="absolute left-1/2 transform -translate-x-1/2">
+        <a href="/"
+          ><img
+            width="150"
+            src="/img/logo-semutdev.png"
+            alt="Logo semutdev"
+          /></a
+        >
+      </div>
+      <div class="flex items-center">
+        <button id="menu-toggle" class="text-gray-700 hover:text-blue-600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 </header>
+
+<!-- Mobile Menu (Dropdown) -->
+<div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+  <nav class="flex flex-col space-y-2">
+    <a href="/" class="text-gray-700 hover:text-blue-600">Home</a>
+  </nav>
+</div>
+
 <header>
+  <script type="module">
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
 
-<script type="module">
-const menuToggle = document.getElementById('menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
 
-menuToggle.addEventListener('click', () => {
-	mobileMenu.classList.toggle('hidden');
-});
-</script>
+  <script>
+    // JavaScript untuk menyembunyikan/menampilkan navbar saat scroll
+    let lastScrollY = window.scrollY;
+    const navbar = document.getElementById("navbar");
+    // Jangan sembunyikan navbar sampai pengguna scroll melewati ketinggian navbar
+    const scrollThreshold = 80;
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > scrollThreshold && lastScrollY < window.scrollY) {
+        // Scroll ke bawah -> sembunyikan navbar
+        navbar.classList.add("-translate-y-full");
+      } else {
+        // Scroll ke atas -> tampilkan navbar
+        navbar.classList.remove("-translate-y-full");
+      }
+      lastScrollY = window.scrollY;
+    });
+  </script>
+</header>
