@@ -2,7 +2,7 @@
 title: "Script Website Kupon Qurban Premium: Database & QR Code Scanner!"
 description: "Script Website Kupon Qurban Premium: Database & QR Code Scanner!"
 price: 50000
-discount: 0
+discount: 300000
 image: "/product/kupon-qurban/banner.jpg"
 images:
   - "/product/kupon-qurban/banner.jpg"
