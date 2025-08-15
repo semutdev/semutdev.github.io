@@ -1,6 +1,6 @@
 ---
-title: "Script Website Kupon Qurban Premium: Database & QR Code Scanner!"
-description: "Script Website Kupon Qurban Premium: Database & QR Code Scanner!"
+title: "NEW SOURCE CODE Aplikasi Panitia Digital One For All"
+description: "NEW SOURCE CODE Aplikasi Panitia Digital One For All"
 price: 80000
 discount: 400000
 image: "/product/panitia-digital/panitia_digital.jpg"
