@@ -50,22 +50,22 @@ const { title, description, price, discount, images, checkoutUrl } =
           <div class="mt-8 lg:mt-0">
               <div class="flex flex-col space-y-6">
                   <div>
-                      <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1">{title}</h1>
+                      <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mt-1 dark:text-white">{title}</h1>
                   </div>
 
                   <div class="">
                     {
                       discount ? (
                         <div class="flex items-baseline space-x-4">
-                          <span class="text-2xl font-bold text-red-600 dark:text-red-400 line-through">
+                          <span class="text-2xl font-semibold text-gray-600 dark:text-gray-400  line-through">
                             Rp {discount.toLocaleString("id-ID")}
                           </span>
-                          <span class="text-3xl font-extrabold text-blue-700 dark:text-gray-100">
+                          <span class="text-3xl text-[#3b82f6] font-semibold">
                             Rp {price.toLocaleString("id-ID")}
                           </span>
                         </div>
                       ) : (
-                        <span class="text-3xl font-extrabold text-blue-700 dark:text-gray-100">
+                        <span class="text-3xl text-[#3b82f6] font-semibold">
                           Rp {price.toLocaleString("id-ID")}
                         </span>
                       )
